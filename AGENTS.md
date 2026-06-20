@@ -6,7 +6,7 @@ These instructions are foundational mandates for all AI agents (Codex, etc.) ope
 Before reading, editing, or reasoning about any other repository file, the agent must read these two files in this exact order:
 
 1. `AGENTS.md`
-2. `.codexignore`
+2. `.geminiignore`
 
 This startup order is mandatory for every new task, even if the agent has worked in this repository before.
 
