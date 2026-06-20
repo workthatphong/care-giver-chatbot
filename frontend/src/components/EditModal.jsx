@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, ChevronDown, Check, UserPlus, Camera } from 'lucide-react';
+import AccountLinking from './AccountLinking';
 
 const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
   const [formData, setFormData] = useState({});
@@ -85,7 +86,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
     }
   };
 
-  const excludedKeys = ['id', '_type', '_isNew', 'img', 'realImg', 'shapeType', 'colorHex', 'careGiverId'];
+  const excludedKeys = ['id', '_type', '_isNew', 'img', 'realImg', 'shapeType', 'colorHex', 'careGiverId', 'linkedAccounts'];
   const fields = Object.keys(itemData).filter(k => !excludedKeys.includes(k));
 
   const imageSrc = type === 'drug' ? formData.realImg : formData.img;
@@ -241,6 +242,13 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
               );
             })}
           </div>
+
+          {type === 'caregiver' && (
+            <AccountLinking 
+              linkedAccounts={formData.linkedAccounts || []}
+              onChange={(accs) => setFormData({ ...formData, linkedAccounts: accs })}
+            />
+          )}
         </form>
 
         <div className="p-6 border-t border-gray-50 flex justify-end gap-3 bg-gray-50/50 rounded-b-3xl">

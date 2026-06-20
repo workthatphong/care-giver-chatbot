@@ -3,6 +3,7 @@ import {
   X, CreditCard, ClipboardList, Users, MapPin, ChevronRight, 
   HeartHandshake, Barcode, Edit3, Trash2, UserMinus 
 } from 'lucide-react';
+import AccountLinking from './AccountLinking';
 
 const getPillSVG = (shape, colorHex) => {
   let svgContent = '';
@@ -157,6 +158,9 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete }) =>
                       )}
                   </div>
               </div>
+
+              {/* Account Linking Part */}
+              <AccountLinking linkedAccounts={data.linkedAccounts || []} readOnly={true} />
             </>
           )}
 
