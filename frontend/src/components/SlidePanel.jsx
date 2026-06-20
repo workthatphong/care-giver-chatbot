@@ -3,7 +3,6 @@ import {
   X, CreditCard, ClipboardList, Users, MapPin, ChevronRight, 
   HeartHandshake, Barcode, Edit3, Trash2, UserMinus 
 } from 'lucide-react';
-import { careGivers, patients, drugs } from '../data/mockData';
 
 const getPillSVG = (shape, colorHex) => {
   let svgContent = '';
@@ -22,15 +21,15 @@ const getPillSVG = (shape, colorHex) => {
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 };
 
-const SlidePanel = ({ detailOpen, setDetailOpen }) => {
+const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete }) => {
   if (!detailOpen) return null;
 
   const { type, id } = detailOpen;
   
   let data = null;
-  if (type === 'caregiver') data = careGivers.find(c => c.id === id);
-  if (type === 'patient') data = patients.find(p => p.id === id);
-  if (type === 'drug') data = drugs.find(d => d.id === id);
+  if (type === 'caregiver') data = appData.caregiver.find(c => c.id === id);
+  if (type === 'patient') data = appData.patient.find(p => p.id === id);
+  if (type === 'drug') data = appData.drug.find(d => d.id === id);
 
   if (!data) return null;
 
@@ -129,12 +128,12 @@ const SlidePanel = ({ detailOpen, setDetailOpen }) => {
                           <h4 className="text-sm font-medium text-gray-700">คนไข้ในการดูแล</h4>
                       </div>
                       <span className="text-[11px] font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">
-                        {patients.filter(p => p.careGiverId === data.id).length} คน
+                        {appData.patient.filter(p => p.careGiverId === data.id).length} คน
                       </span>
                   </div>
                   <div className="space-y-3">
-                      {patients.filter(p => p.careGiverId === data.id).length > 0 ? (
-                        patients.filter(p => p.careGiverId === data.id).map(p => (
+                      {appData.patient.filter(p => p.careGiverId === data.id).length > 0 ? (
+                        appData.patient.filter(p => p.careGiverId === data.id).map(p => (
                           <div key={p.id} onClick={() => setDetailOpen({ type: 'patient', id: p.id })} className="flex items-center gap-3 p-3 bg-white border border-gray-100 rounded-xl cursor-pointer hover:border-blue-200 hover:shadow-[0_4px_12px_rgba(59,130,246,0.08)] transition-all duration-300 group">
                               <img src={p.img} className="w-10 h-10 rounded-full object-cover bg-gray-50 border border-gray-100" alt="patient" />
                               <div className="flex-1 min-w-0">
@@ -290,10 +289,10 @@ const SlidePanel = ({ detailOpen, setDetailOpen }) => {
 
         {/* Footer */}
         <div className="p-6 border-t border-gray-50 flex gap-3 bg-white/90 backdrop-blur-md">
-            <button className="flex-1 py-3 px-4 rounded-xl text-pink-600 bg-pink-50 hover:bg-pink-100 font-medium text-sm transition-colors flex items-center justify-center gap-2 outline-none">
+            <button onClick={() => onEdit(type, data)} className="flex-1 py-3 px-4 rounded-xl text-pink-600 bg-pink-50 hover:bg-pink-100 font-medium text-sm transition-colors flex items-center justify-center gap-2 outline-none">
                 <Edit3 className="w-4 h-4" /> แก้ไขข้อมูล
             </button>
-            <button className="w-12 h-12 shrink-0 rounded-xl text-red-500 bg-red-50 hover:bg-red-100 hover:text-red-600 transition-colors flex items-center justify-center outline-none">
+            <button onClick={() => onDelete(type, data.id, data.title ? `${data.title}${data.fname} ${data.lname}` : data.name)} className="w-12 h-12 shrink-0 rounded-xl text-red-500 bg-red-50 hover:bg-red-100 hover:text-red-600 transition-colors flex items-center justify-center outline-none">
                 <Trash2 className="w-5 h-5" />
             </button>
         </div>

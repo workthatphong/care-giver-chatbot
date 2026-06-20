@@ -1,7 +1,7 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
 
-const Header = ({ currentView }) => {
+const Header = ({ currentView, onAdd }) => {
   let title = '';
   let desc = '';
   let btnText = '';
@@ -35,7 +35,7 @@ const Header = ({ currentView }) => {
         <h1 className="text-2xl font-semibold text-gray-800 tracking-tight">{title}</h1>
         <p className="text-sm text-gray-500 mt-1">{desc}</p>
       </div>
-      <button className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2.5 rounded-full font-medium text-sm shadow-[0_4px_14px_rgba(236,72,153,0.3)] transition-all duration-300 hover:shadow-[0_6px_20px_rgba(236,72,153,0.4)] hover:-translate-y-0.5 flex items-center gap-2 outline-none">
+      <button onClick={onAdd} className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2.5 rounded-full font-medium text-sm shadow-[0_4px_14px_rgba(236,72,153,0.3)] transition-all duration-300 hover:shadow-[0_6px_20px_rgba(236,72,153,0.4)] hover:-translate-y-0.5 flex items-center gap-2 outline-none">
         <Plus className="w-4 h-4" />
         <span>{btnText}</span>
       </button>
