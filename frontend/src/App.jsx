@@ -44,6 +44,26 @@ function App() {
   const [deleteModal, setDeleteModal] = useState({ isOpen: false, item: null });
   const [editModal, setEditModal] = useState({ isOpen: false, item: null });
 
+  // ฟังก์ชันกลางสำหรับเรียก API ไปทำการบันทึกข้อมูล
+  const callApi = async (action, type, payload = null, id = null) => {
+    try {
+      const res = await fetch('/api', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, type, payload, id })
+      });
+      const result = await res.json();
+      if (!res.ok) {
+        throw new Error(result.error || result.message || "Unknown error");
+      }
+      return result;
+    } catch (error) {
+      console.error("API Call Failed:", error);
+      alert("เกิดข้อผิดพลาดในการบันทึก: " + error.message);
+      throw error;
+    }
+  };
+
   const getEmptyTemplate = (type) => {
     if (type === 'caregiver') {
       return { id: Date.now(), title: '', fname: '', lname: '', carePlans: 0, nid: '', address: '', moo: '', subdist: '', dist: '', prov: '', patients: 0, img: 'https://placehold.co/150x150/fce7f3/db2777?text=NEW' };
@@ -72,43 +92,63 @@ function App() {
     setDeleteModal({ isOpen: true, item: { type, id, name } });
   };
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     const { type, id } = deleteModal.item;
-    setAppData(prev => ({
-      ...prev,
-      [type]: prev[type].filter(item => item.id !== id)
-    }));
-    setDetailOpen(null); // Close panel after delete
-    setDeleteModal({ isOpen: false, item: null });
+    try {
+      await callApi('delete', type, null, id);
+      setAppData(prev => ({
+        ...prev,
+        [type]: prev[type].filter(item => item.id !== id)
+      }));
+      setDetailOpen(null); // Close panel after delete
+      setDeleteModal({ isOpen: false, item: null });
+    } catch (error) {
+      // แจ้งเตือน Error ทำงานแล้วใน callApi
+    }
   };
 
-  const saveEdit = (type, updatedData, relationalUpdates) => {
-    setAppData(prev => {
-      let newState = { ...prev };
-      
+  const saveEdit = async (type, updatedData, relationalUpdates) => {
+    try {
       const isNew = updatedData._isNew;
-      if (isNew) delete updatedData._isNew;
-
+      let payload = { ...updatedData };
       if (isNew) {
-        newState[type] = [...newState[type], updatedData];
-      } else {
-        newState[type] = newState[type].map(item => item.id === updatedData.id ? updatedData : item);
+        delete payload.id; // ให้ DB สร้าง ID อัตโนมัติ
       }
+
+      const res = await callApi(isNew ? 'create' : 'update', type, payload, isNew ? null : payload.id);
       
-      if (type === 'caregiver' && relationalUpdates?.selectedPatientIds) {
-        newState.patient = newState.patient.map(p => {
-          if (relationalUpdates.selectedPatientIds.includes(p.id)) {
-            return { ...p, careGiverId: updatedData.id, primaryCareGiver: `${updatedData.title || ''}${updatedData.fname} ${updatedData.lname}`.trim() };
-          } else if (p.careGiverId === updatedData.id) {
-            return { ...p, careGiverId: null, primaryCareGiver: '-' };
-          }
-          return p;
-        });
-      }
-      
-      return newState;
-    });
-    setEditModal({ isOpen: false, item: null });
+      // ดึง Data ที่ถูกสร้างแล้วกลับมาจาก API (เพื่อจะได้ ID จริงจาก DB)
+      const savedData = res.data ? res.data : updatedData;
+      // ลบ flag พิเศษก่อนใส่ State
+      delete savedData._isNew;
+      delete savedData._type;
+
+      setAppData(prev => {
+        let newState = { ...prev };
+        
+        if (isNew) {
+          newState[type] = [...newState[type], savedData];
+        } else {
+          newState[type] = newState[type].map(item => item.id === savedData.id ? savedData : item);
+        }
+        
+        if (type === 'caregiver' && relationalUpdates?.selectedPatientIds) {
+          newState.patient = newState.patient.map(p => {
+            if (relationalUpdates.selectedPatientIds.includes(p.id)) {
+              return { ...p, careGiverId: savedData.id, primaryCareGiver: `${savedData.title || ''}${savedData.fname} ${savedData.lname}`.trim() };
+            } else if (p.careGiverId === savedData.id) {
+              return { ...p, careGiverId: null, primaryCareGiver: '-' };
+            }
+            return p;
+          });
+        }
+        
+        return newState;
+      });
+      setEditModal({ isOpen: false, item: null });
+    } catch (error) {
+      // แจ้งเตือน Error ทำงานแล้วใน callApi
+    }
   };
 
   const handleItemClick = (item, type) => {
