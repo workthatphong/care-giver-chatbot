@@ -31,9 +31,9 @@ const PhoneIcon = () => (
 );
 
 export const providersList = [
-  { id: 'Google', name: 'Google', icon: <GoogleIcon /> },
-  { id: 'Facebook', name: 'Facebook', icon: <FacebookIcon /> },
-  { id: 'Line', name: 'LINE', icon: <LineIcon /> },
+  { id: 'Google', name: 'กูเกิล', icon: <GoogleIcon /> },
+  { id: 'Facebook', name: 'เฟซบุ๊ก', icon: <FacebookIcon /> },
+  { id: 'Line', name: 'ไลน์', icon: <LineIcon /> },
   { id: 'Phone', name: 'เบอร์โทรศัพท์', icon: <PhoneIcon /> }
 ];
 
@@ -121,7 +121,7 @@ const AccountLinking = ({ linkedAccounts = [], onChange, readOnly = false }) => 
           <div className="w-7 h-7 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 shadow-sm">
             <Link2 className="w-3.5 h-3.5" />
           </div>
-          <h4 className="text-sm font-semibold text-gray-800 tracking-wide">ระบบผูกบัญชี (Account Linking)</h4>
+          <h4 className="text-sm font-semibold text-gray-800 tracking-wide">ระบบผูกบัญชี</h4>
         </div>
 
         {/* State: Idle */}
@@ -222,7 +222,7 @@ const AccountLinking = ({ linkedAccounts = [], onChange, readOnly = false }) => 
                 disabled={phoneNumber.length < 9}
                 className="px-5 py-2.5 rounded-xl bg-purple-500 text-white font-medium hover:bg-purple-600 disabled:opacity-40 transition-all text-sm shadow-[0_4px_12px_rgba(168,85,247,0.25)] outline-none"
               >
-                ส่ง OTP
+                ส่งรหัสยืนยัน
               </button>
             </div>
           </div>
@@ -231,7 +231,7 @@ const AccountLinking = ({ linkedAccounts = [], onChange, readOnly = false }) => 
         {/* State: OTP Input */}
         {linkState === 'otp_input' && (
           <div className="animate-popUp flex flex-col items-center py-2 relative z-10">
-            <p className="text-sm font-semibold text-gray-800 mb-1">กรอกรหัส OTP</p>
+            <p className="text-sm font-semibold text-gray-800 mb-1">กรอกรหัสยืนยัน</p>
             <p className="text-[11px] text-gray-400 mb-4 text-center px-4">
               ระบบได้ส่งรหัสไปยังเบอร์ <span className="font-semibold text-gray-600">{phoneNumber}</span> แล้ว
             </p>
@@ -261,7 +261,7 @@ const AccountLinking = ({ linkedAccounts = [], onChange, readOnly = false }) => 
                 disabled={otp.length < 4}
                 className="flex-1 py-2.5 rounded-xl bg-purple-500 text-white font-medium hover:bg-purple-600 disabled:opacity-40 transition-all text-sm shadow-[0_4px_12px_rgba(168,85,247,0.25)] outline-none"
               >
-                ยืนยัน OTP
+                ยืนยันรหัส
               </button>
             </div>
           </div>

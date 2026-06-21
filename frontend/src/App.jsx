@@ -66,13 +66,13 @@ function App() {
 
   const getEmptyTemplate = (type) => {
     if (type === 'caregiver') {
-      return { id: Date.now(), title: '', fname: '', lname: '', carePlans: 0, nid: '', address: '', moo: '', subdist: '', dist: '', prov: '', patients: 0, img: 'https://placehold.co/150x150/fce7f3/db2777?text=NEW' };
+      return { id: Date.now(), title: '', fname: '', lname: '', carePlans: 0, nid: '', address: '', moo: '', subdist: '', dist: '', prov: '', patients: 0, img: 'https://placehold.co/150x150/fce7f3/db2777?text=%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%8C' };
     }
     if (type === 'patient') {
-      return { id: Date.now(), title: '', fname: '', lname: '', age: 0, nid: '', adl: 0, ltcGroup: '', frequency: '', weight: 0, height: 0, bmi: 0, waist: 0, address: '', moo: '', subdist: '', dist: '', prov: '', primaryCareGiver: '', careGiverId: null, img: 'https://placehold.co/150x150/e0f2fe/0284c7?text=NEW', medications: [], problems: [], goals: [] };
+      return { id: Date.now(), title: '', fname: '', lname: '', age: 0, nid: '', adl: 0, ltcGroup: '', frequency: '', weight: 0, height: 0, bmi: 0, waist: 0, address: '', moo: '', subdist: '', dist: '', prov: '', primaryCareGiver: '', careGiverId: null, img: 'https://placehold.co/150x150/e0f2fe/0284c7?text=%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%8C', medications: [], problems: [], goals: [] };
     }
     if (type === 'drug') {
-      return { id: Date.now(), name: '', dosage: '', barcode: '', colorTxt: '', colorHex: '#ffffff', shapeTxt: '', shapeType: 'round', realImg: 'https://placehold.co/300x200/f8fafc/94a3b8?text=NEW', symptoms: [] };
+      return { id: Date.now(), name: '', dosage: '', barcode: '', colorTxt: '', colorHex: '#ffffff', shapeTxt: '', shapeType: 'round', realImg: 'https://placehold.co/300x200/f8fafc/94a3b8?text=%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%8C', symptoms: [] };
     }
     if (type === 'careplan') {
       return { id: Date.now(), patientId: '', careGiverId: '', date: '', time: '', duration: '', symptomsSummary: '', temp: '', hr: '', rr: '', bp: '', screening2Q: '', adlToday: '', amt: '', generalCondition: '', activitiesPerformed: '', evaluationResult: '' };

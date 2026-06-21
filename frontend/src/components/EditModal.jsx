@@ -83,7 +83,7 @@ const PatientMedications = ({ formData, setFormData, appData }) => {
   return (
     <div className="col-span-2 mt-2 bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
       <div className="flex justify-between items-center mb-4">
-        <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider">เวลาทานยา (Medications)</label>
+        <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider">เวลาทานยา</label>
         {!isAdding && (
           <button type="button" onClick={() => setIsAdding(true)} className="px-3 py-1.5 bg-pink-50 text-pink-600 rounded-lg text-xs font-semibold hover:bg-pink-100 transition-colors">
             + เพิ่มยา
@@ -98,7 +98,7 @@ const PatientMedications = ({ formData, setFormData, appData }) => {
            return (
              <div key={idx} className="p-3 border border-gray-100 rounded-xl bg-gray-50/50 flex items-center justify-between group">
                <div className="flex items-center gap-3">
-                 <img src={getPillSVG(drug.shapeType, drug.colorHex)} alt="pill" className="w-10 h-10 drop-shadow-sm" />
+                 <img src={getPillSVG(drug.shapeType, drug.colorHex)} alt="เม็ดยา" className="w-10 h-10 drop-shadow-sm" />
                  <div>
                    <p className="text-sm font-semibold text-gray-800">{drug.name} <span className="text-xs font-medium text-pink-500 bg-pink-50 px-1.5 py-0.5 rounded">{drug.dosage}</span></p>
                    <p className="text-[11px] text-gray-500 mt-1">{med.days.join(', ')} • {med.time} • {med.frequency}</p>
@@ -162,7 +162,7 @@ const PatientMedications = ({ formData, setFormData, appData }) => {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-[10px] font-semibold text-gray-500 mb-1.5">เวลาที่ทานยา (Time)</label>
+              <label className="block text-[10px] font-semibold text-gray-500 mb-1.5">เวลาที่ทานยา</label>
               <select className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-pink-300 bg-white" value={newMed.time} onChange={e => setNewMed({...newMed, time: e.target.value})}>
                 <option value="">-- เลือกมื้อ --</option>
                 <option value="มื้อเช้า">มื้อเช้า</option>
@@ -171,7 +171,7 @@ const PatientMedications = ({ formData, setFormData, appData }) => {
               </select>
             </div>
             <div>
-              <label className="block text-[10px] font-semibold text-gray-500 mb-1.5">ความถี่ (Frequency)</label>
+              <label className="block text-[10px] font-semibold text-gray-500 mb-1.5">ความถี่การทาน</label>
               <select className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-pink-300 bg-white" value={newMed.frequency} onChange={e => setNewMed({...newMed, frequency: e.target.value})}>
                 <option value="">-- เลือกความถี่ --</option>
                 <option value="ครั้งละ 1 เม็ด">ครั้งละ 1 เม็ด</option>
@@ -183,7 +183,7 @@ const PatientMedications = ({ formData, setFormData, appData }) => {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-[10px] font-semibold text-gray-500 mb-1.5">วิธีทานยา (Method)</label>
+              <label className="block text-[10px] font-semibold text-gray-500 mb-1.5">วิธีทานยา</label>
               <select className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-pink-300 bg-white" value={newMed.method} onChange={e => setNewMed({...newMed, method: e.target.value})}>
                 <option value="">-- เลือกวิธีทาน --</option>
                 <option value="ก่อนอาหาร">ก่อนอาหาร</option>
@@ -191,7 +191,7 @@ const PatientMedications = ({ formData, setFormData, appData }) => {
               </select>
             </div>
             <div>
-              <label className="block text-[10px] font-semibold text-gray-500 mb-1.5">บันทึกเสริม (Notes)</label>
+              <label className="block text-[10px] font-semibold text-gray-500 mb-1.5">บันทึกเพิ่มเติม</label>
               <input type="text" placeholder="ข้อมูลเพิ่มเติม..." className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-pink-300 bg-white" value={newMed.notes} onChange={e => setNewMed({...newMed, notes: e.target.value})} />
             </div>
           </div>
@@ -240,7 +240,7 @@ const PatientCarePlan = ({ formData, setFormData }) => {
 
   return (
     <div className="col-span-2 mt-4 bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-6">
-      <h4 className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">แผนการดูแลระยะยาว (Long-Term Care Plan)</h4>
+      <h4 className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">แผนการดูแลระยะยาว</h4>
       
       {/* Problems */}
       <div>
@@ -313,6 +313,47 @@ const PatientCarePlan = ({ formData, setFormData }) => {
       </div>
     </div>
   );
+};
+
+const fieldLabels = {
+  title: 'คำนำหน้าชื่อ',
+  fname: 'ชื่อจริง',
+  lname: 'นามสกุล',
+  nid: 'เลขประจำตัวประชาชน',
+  address: 'บ้านเลขที่ / ที่อยู่',
+  moo: 'หมู่ที่',
+  subdist: 'ตำบล',
+  dist: 'อำเภอ',
+  prov: 'จังหวัด',
+  age: 'อายุ (ปี)',
+  weight: 'น้ำหนัก (กิโลกรัม)',
+  height: 'ส่วนสูง (เซนติเมตร)',
+  bmi: 'ดัชนีมวลกาย',
+  waist: 'รอบเอว (เซนติเมตร)',
+  adl: 'ระดับการปฏิบัติกิจวัตรประจำวัน',
+  ltcGroup: 'กลุ่มการดูแลระยะยาว',
+  frequency: 'ความถี่การดูแล',
+  name: 'ชื่อยา',
+  dosage: 'ขนาดยา',
+  barcode: 'รหัสบาร์โค้ด',
+  duration: 'ระยะเวลาที่ดูแล (นาที)',
+  symptomsSummary: 'สรุปอาการเด่นในวันนี้',
+  temp: 'อุณหภูมิร่างกาย (องศาเซลเซียส)',
+  hr: 'ชีพจร (ครั้งต่อนาที)',
+  rr: 'อัตราการหายใจ (ครั้งต่อนาที)',
+  bp: 'ความดันโลหิต (มิลลิเมตรปรอท)',
+  adlToday: 'ระดับการทำกิจวัตรประจำวันวันนี้',
+  amt: 'การประเมินสมรรถภาพสมอง',
+  generalCondition: 'บันทึกสภาพทั่วไปและอาการสำคัญ',
+  evaluationResult: 'ผลประเมินและการปฏิบัติการ',
+  primaryCareGiver: 'ผู้ดูแลรับผิดชอบ',
+  patients: 'คนไข้ในการดูแล',
+  patientId: 'คนไข้',
+  careGiverId: 'ผู้ประเมิน',
+  date: 'วันที่ประเมิน',
+  time: 'เวลา',
+  screening2Q: 'แบบคัดกรองโรคซึมเศร้า 2 คำถาม',
+  activitiesPerformed: 'กิจกรรมการดูแลที่ปฏิบัติงาน'
 };
 
 const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
@@ -463,7 +504,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
           {type !== 'careplan' && (
             <div className="flex justify-center mb-8">
               <div className={`relative group cursor-pointer ${type === 'drug' ? 'w-48 h-32 rounded-2xl' : 'w-24 h-24 rounded-full'} overflow-hidden shadow-sm bg-gray-50 ring-4 ring-pink-50/50 hover:ring-pink-100 transition-all`}>
-                <img src={imageSrc} className="w-full h-full object-cover" alt="Profile" />
+                <img src={imageSrc} className="w-full h-full object-cover" alt="รูปโปรไฟล์" />
                 <label className="absolute inset-0 bg-gray-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
                   <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
                   <Camera className="w-7 h-7 text-white drop-shadow-md" />
@@ -481,7 +522,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                 return (
                   <div key={key} className="col-span-2 relative" ref={cgDropdownRef}>
                     <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">
-                      ผู้ดูแลรับผิดชอบ (Care Giver)
+                      {fieldLabels[key] || key}
                     </label>
                     <div 
                       onClick={() => setCgDropdownOpen(!cgDropdownOpen)}
@@ -489,7 +530,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                     >
                       {selectedCg ? (
                         <div className="flex items-center gap-3">
-                          <img src={selectedCg.img} className="w-7 h-7 rounded-full object-cover border border-gray-200 shadow-sm" alt="cg" />
+                          <img src={selectedCg.img} className="w-7 h-7 rounded-full object-cover border border-gray-200 shadow-sm" alt="ผู้ดูแล" />
                           <span className="text-sm font-medium text-gray-800">{selectedCg.title}{selectedCg.fname} {selectedCg.lname}</span>
                         </div>
                       ) : (
@@ -506,7 +547,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                             onClick={() => handleCareGiverSelect(cg)}
                             className={`flex items-center gap-3 px-4 py-2.5 cursor-pointer hover:bg-pink-50 transition-colors ${formData.careGiverId === cg.id ? 'bg-pink-50/50' : ''}`}
                           >
-                            <img src={cg.img} className="w-8 h-8 rounded-full object-cover border border-pink-100" alt="cg" />
+                            <img src={cg.img} className="w-8 h-8 rounded-full object-cover border border-pink-100" alt="ผู้ดูแล" />
                             <div className="flex-1">
                               <p className={`text-sm font-medium ${formData.careGiverId === cg.id ? 'text-pink-600' : 'text-gray-700'}`}>
                                 {cg.title}{cg.fname} {cg.lname}
@@ -526,7 +567,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                 return (
                   <div key={key} className="col-span-2 relative" ref={ptDropdownRef}>
                     <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">
-                      คนไข้ในการดูแล (Patients)
+                      {fieldLabels[key] || key}
                     </label>
                     <div 
                       onClick={() => setPtDropdownOpen(!ptDropdownOpen)}
@@ -561,7 +602,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                               <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${isSelected ? 'bg-blue-500 border-blue-500' : 'bg-white border-gray-300'}`}>
                                 {isSelected && <Check className="w-3.5 h-3.5 text-white" />}
                               </div>
-                              <img src={pt.img} className="w-8 h-8 rounded-full object-cover border border-gray-200" alt="pt" />
+                              <img src={pt.img} className="w-8 h-8 rounded-full object-cover border border-gray-200" alt="ผู้ป่วย" />
                               <div className="flex-1">
                                 <p className={`text-sm font-medium ${isSelected ? 'text-blue-600' : 'text-gray-700'}`}>
                                   {pt.title}{pt.fname} {pt.lname}
@@ -585,7 +626,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
               if (type === 'drug' && key === 'barcode') {
                 return (
                   <div key={key} className={isFullWidth ? "col-span-2" : ""}>
-                    <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">{key}</label>
+                    <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">{fieldLabels[key] || key}</label>
                     <div className="relative">
                       <input 
                         type="text" 
@@ -604,7 +645,6 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                               const reader = new FileReader();
                               reader.onloadend = () => {
                                 setFormData({ ...formData, barcodeImg: reader.result });
-                                // Optional: You could also mock a decoded barcode number here if desired.
                               };
                               reader.readAsDataURL(file);
                             }
@@ -613,7 +653,6 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                         <Camera className="w-4 h-4" />
                       </label>
                     </div>
-                    {/* Optional small preview indicator if image is uploaded */}
                     {formData.barcodeImg && (
                        <p className="text-[10px] text-green-500 mt-1 ml-1 flex items-center gap-1">
                           <Check className="w-3 h-3" /> อัปโหลดรูปบาร์โค้ดสำเร็จ
@@ -626,7 +665,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
               if (type === 'drug' && key === 'dosage') {
                 return (
                   <div key={key} className={isFullWidth ? "col-span-2" : ""}>
-                    <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">{key}</label>
+                    <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">{fieldLabels[key] || key}</label>
                     <input 
                       type="text" 
                       list="dosage-presets"
@@ -636,13 +675,13 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                       placeholder="เริ่มพิมพ์เพื่อดูตัวเลือกขนาดยา..."
                     />
                     <datalist id="dosage-presets">
-                      <option value="1000 mg" />
-                      <option value="500 mg" />
-                      <option value="250 mg" />
-                      <option value="100 mg" />
-                      <option value="50 mg" />
-                      <option value="10 mg" />
-                      <option value="5 mg" />
+                      <option value="1000 มก." />
+                      <option value="500 มก." />
+                      <option value="250 มก." />
+                      <option value="100 มก." />
+                      <option value="50 มก." />
+                      <option value="10 มก." />
+                      <option value="5 มก." />
                       <option value="1 ช้อนโต๊ะ" />
                       <option value="1 ช้อนชา" />
                       <option value="1 เม็ด" />
@@ -656,7 +695,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                 if (key === 'patientId') {
                   return (
                     <div key={key} className={isFullWidth ? "col-span-2" : ""}>
-                      <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">คนไข้ (Patient)</label>
+                      <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">{fieldLabels[key] || key}</label>
                       <select 
                         value={formData.patientId || ''}
                         onChange={(e) => setFormData({ ...formData, patientId: e.target.value })}
@@ -673,7 +712,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                 if (key === 'careGiverId') {
                   return (
                     <div key={key} className={isFullWidth ? "col-span-2" : ""}>
-                      <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">ผู้ประเมิน (Care Giver)</label>
+                      <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">{fieldLabels[key] || key}</label>
                       <select 
                         value={formData.careGiverId || ''}
                         onChange={(e) => setFormData({ ...formData, careGiverId: e.target.value })}
@@ -690,7 +729,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                 if (key === 'date') {
                   return (
                     <div key={key} className={isFullWidth ? "col-span-2" : ""}>
-                      <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">วันที่ประเมิน</label>
+                      <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">{fieldLabels[key] || key}</label>
                       <input 
                         type="date"
                         value={formData.date || ''}
@@ -703,7 +742,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                 if (key === 'time') {
                   return (
                     <div key={key} className={isFullWidth ? "col-span-2" : ""}>
-                      <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">เวลา</label>
+                      <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">{fieldLabels[key] || key}</label>
                       <input 
                         type="time"
                         value={formData.time || ''}
@@ -716,7 +755,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                 if (key === 'screening2Q') {
                   return (
                     <div key={key} className={isFullWidth ? "col-span-2" : ""}>
-                      <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">คัดกรอง 2Q</label>
+                      <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">{fieldLabels[key] || key}</label>
                       <select 
                         value={formData.screening2Q || ''}
                         onChange={(e) => setFormData({ ...formData, screening2Q: e.target.value })}
@@ -770,7 +809,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
 
                 return (
                   <div key={key} className="col-span-2">
-                    <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">กิจกรรมการดูแลที่ปฏิบัติงาน</label>
+                    <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">{fieldLabels[key] || key}</label>
                     <div className="bg-gray-50/50 p-4 rounded-xl border border-gray-200 space-y-3">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {options.map(opt => (
@@ -804,7 +843,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
 
               return (
                 <div key={key} className={isFullWidth ? "col-span-2" : ""}>
-                  <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">{key}</label>
+                  <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">{fieldLabels[key] || key}</label>
                   <input 
                     type="text" 
                     value={formData[key] || ''} 
@@ -822,12 +861,12 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
               <div className="grid grid-cols-2 gap-4">
                  <div className="bg-white rounded-2xl p-4 border border-gray-100 flex flex-col items-center justify-center shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
                    <span className="text-[11px] text-gray-400 font-medium mb-3">ตัวอย่างรูปลักษณ์อ้างอิง</span>
-                   <img src={getPillSVG(formData.shapeType || 'round', formData.colorHex || '#ffffff')} className="w-16 h-16 drop-shadow-md transition-all duration-300" alt="Preview" />
+                   <img src={getPillSVG(formData.shapeType || 'round', formData.colorHex || '#ffffff')} className="w-16 h-16 drop-shadow-md transition-all duration-300" alt="ตัวอย่าง" />
                  </div>
                  
                  <div className="space-y-4">
                     <div>
-                       <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">สีอ้างอิง (Color)</label>
+                       <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">สีอ้างอิง</label>
                        <div className="flex flex-wrap gap-1.5">
                           {[
                             { text: 'สีขาว', hex: '#ffffff' },
@@ -853,7 +892,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                     </div>
 
                     <div>
-                       <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">รูปทรงอ้างอิง (Shape)</label>
+                       <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-2 ml-1">รูปทรงอ้างอิง</label>
                        <div className="flex flex-wrap gap-1.5">
                           {[
                             { text: 'กลมเล็ก', type: 'round-small' },

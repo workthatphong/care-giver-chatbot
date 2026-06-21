@@ -5,10 +5,10 @@ const Sidebar = ({ currentView, setCurrentView }) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
   const navItems = [
-    { id: 'caregiver', icon: HeartHandshake, label: 'Care giver' },
-    { id: 'patient', icon: Users, label: 'Patient' },
-    { id: 'drug', icon: Pill, label: 'Drug' },
-    { id: 'careplan', icon: ClipboardList, label: 'Care plan' }
+    { id: 'caregiver', icon: HeartHandshake, label: 'ผู้ดูแล' },
+    { id: 'patient', icon: Users, label: 'ผู้ป่วย' },
+    { id: 'drug', icon: Pill, label: 'ยา' },
+    { id: 'careplan', icon: ClipboardList, label: 'แผนการดูแล' }
   ];
 
   return (
@@ -17,7 +17,7 @@ const Sidebar = ({ currentView, setCurrentView }) => {
         <div className="w-8 h-8 rounded-xl bg-pink-200 flex items-center justify-center text-pink-600 shrink-0 shadow-sm">
           <HeartPulse className="w-5 h-5" />
         </div>
-        <span className={`ml-3 text-2xl font-semibold text-gray-800 tracking-tight transition-opacity duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0 hidden'}`}>Care</span>
+        <span className={`ml-3 text-2xl font-semibold text-gray-800 tracking-tight transition-opacity duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0 hidden'}`}>ระบบดูแล</span>
         
         <button onClick={() => setIsExpanded(!isExpanded)} className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-white border border-pink-100 rounded-full flex items-center justify-center text-gray-400 hover:text-pink-500 hover:border-pink-300 shadow-sm transition-colors focus:outline-none z-50">
           {isExpanded ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}

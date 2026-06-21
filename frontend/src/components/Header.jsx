@@ -8,22 +8,27 @@ const Header = ({ currentView, onAdd }) => {
 
   switch (currentView) {
     case 'caregiver':
-      title = 'Care Giver';
+      title = 'ผู้ดูแล';
       desc = 'จัดการรายชื่อและข้อมูลผู้ดูแลในระบบ';
       btnText = 'เพิ่มผู้ดูแล';
       break;
     case 'patient':
-      title = 'Patient';
-      desc = 'จัดการรายชื่อและข้อมูลคนไข้ในระบบ';
-      btnText = 'เพิ่มคนไข้';
+      title = 'ผู้ป่วย';
+      desc = 'จัดการรายชื่อและข้อมูลผู้ป่วยในระบบ';
+      btnText = 'เพิ่มผู้ป่วย';
       break;
     case 'drug':
-      title = 'Drug';
+      title = 'ยา';
       desc = 'จัดการคลังยา ขนาดยา และรูปแบบเม็ดยา';
       btnText = 'เพิ่มยา';
       break;
+    case 'careplan':
+      title = 'แผนการดูแล';
+      desc = 'จัดการและบันทึกผลการตรวจคัดกรองรายวัน';
+      btnText = 'เพิ่มบันทึก';
+      break;
     default:
-      title = currentView.charAt(0).toUpperCase() + currentView.slice(1);
+      title = 'ข้อมูล';
       desc = 'ข้อมูลระบบอยู่ระหว่างการพัฒนา';
       btnText = 'เพิ่มข้อมูล';
       break;

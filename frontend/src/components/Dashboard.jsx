@@ -24,7 +24,7 @@ const Dashboard = ({ currentView, setDetailOpen, appData }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
         {appData.caregiver.map(cg => (
           <div key={cg.id} onClick={() => setDetailOpen({ type: 'caregiver', id: cg.id })} className="bg-white rounded-2xl p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(236,72,153,0.1)] hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-pink-50/60 flex items-center gap-4 group">
-             <img src={cg.img} className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border border-gray-100 bg-gray-50" alt="caregiver" />
+             <img src={cg.img} className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border border-gray-100 bg-gray-50" alt="ผู้ดูแล" />
              <div className="flex-1 min-w-0">
                  <h3 className="text-gray-800 font-medium truncate">{cg.fname} {cg.lname}</h3>
                  <p className="text-[12px] sm:text-[13px] text-gray-400 mt-0.5 truncate flex items-center gap-1.5">
@@ -45,7 +45,7 @@ const Dashboard = ({ currentView, setDetailOpen, appData }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
         {appData.patient.map(pt => (
           <div key={pt.id} onClick={() => setDetailOpen({ type: 'patient', id: pt.id })} className="bg-white rounded-2xl p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(2,132,199,0.08)] hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-gray-100 flex items-start gap-4 group">
-             <img src={pt.img} className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border border-gray-100 bg-gray-50" alt="patient" />
+             <img src={pt.img} className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border border-gray-100 bg-gray-50" alt="ผู้ป่วย" />
              <div className="flex-1 min-w-0 mt-0.5">
                  <div className="flex justify-between items-start">
                      <h3 className="text-gray-800 font-medium truncate text-sm sm:text-base">{pt.title}{pt.fname} {pt.lname}</h3>
@@ -53,7 +53,7 @@ const Dashboard = ({ currentView, setDetailOpen, appData }) => {
                  </div>
                  <div className="flex items-center gap-3 mt-1.5">
                      <div className="flex items-center gap-1 text-[11px] text-gray-500">
-                         <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div> ADL: <span className="font-medium text-gray-700">{pt.adl}</span>
+                          <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div> การทำกิจวัตรประจำวัน: <span className="font-medium text-gray-700">{pt.adl}</span>
                      </div>
                  </div>
                  <p className="text-[11px] text-gray-400 mt-2 truncate flex items-center gap-1.5 bg-gray-50 py-1 px-2 rounded-md w-fit">
@@ -72,7 +72,7 @@ const Dashboard = ({ currentView, setDetailOpen, appData }) => {
         {appData.drug.map(drug => (
           <div key={drug.id} onClick={() => setDetailOpen({ type: 'drug', id: drug.id })} className="bg-white rounded-2xl p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(236,72,153,0.1)] hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-gray-100 flex items-center gap-4 group">
              <div className="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center">
-                  <img src={getPillSVG(drug.shapeType, drug.colorHex)} className="w-8 h-8 sm:w-10 sm:h-10 group-hover:scale-110 transition-transform" alt="pill" />
+                  <img src={getPillSVG(drug.shapeType, drug.colorHex)} className="w-8 h-8 sm:w-10 sm:h-10 group-hover:scale-110 transition-transform" alt="ยา" />
              </div>
              <div className="flex-1 min-w-0">
                  <h3 className="text-gray-800 font-semibold truncate text-sm sm:text-base">{drug.name}</h3>
@@ -107,7 +107,7 @@ const Dashboard = ({ currentView, setDetailOpen, appData }) => {
               </div>
               
               <div className="flex items-center gap-3">
-                 <img src={patient?.img} alt="patient" className="w-10 h-10 rounded-full border border-gray-100 bg-gray-50" />
+                 <img src={patient?.img} alt="ผู้ป่วย" className="w-10 h-10 rounded-full border border-gray-100 bg-gray-50" />
                  <div className="flex-1 min-w-0">
                     <p className="text-[10px] text-gray-400 font-medium uppercase">ผู้ป่วย</p>
                     <h4 className="text-[13px] font-semibold text-gray-800 truncate">{patient?.title}{patient?.fname} {patient?.lname}</h4>
@@ -115,7 +115,7 @@ const Dashboard = ({ currentView, setDetailOpen, appData }) => {
               </div>
               
               <div className="flex items-center gap-3 mt-1">
-                 <img src={caregiver?.img} alt="caregiver" className="w-8 h-8 rounded-full border border-gray-100 bg-gray-50" />
+                 <img src={caregiver?.img} alt="ผู้ดูแล" className="w-8 h-8 rounded-full border border-gray-100 bg-gray-50" />
                  <div className="flex-1 min-w-0">
                     <p className="text-[10px] text-gray-400 font-medium uppercase">ผู้ตรวจประเมิน</p>
                     <p className="text-[12px] font-medium text-gray-700 truncate">{caregiver?.fname} {caregiver?.lname}</p>

@@ -56,7 +56,7 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
         {type !== 'careplan' && (
           <div className="p-8 pb-6 border-b border-pink-50 flex justify-between items-start relative bg-gradient-to-b from-pink-50/30 to-transparent">
               <div className="flex items-center gap-5">
-                   <img src={data.img || data.realImg} className="w-16 h-16 rounded-full object-cover border-4 border-white shadow-sm bg-pink-50" alt="profile" />
+                   <img src={data.img || data.realImg} className="w-16 h-16 rounded-full object-cover border-4 border-white shadow-sm bg-pink-50" alt="โปรไฟล์" />
                    <div>
                        <h2 className="text-lg font-semibold text-gray-800 tracking-tight">
                          {data.title ? `${data.title}${data.fname} ${data.lname}` : data.name}
@@ -83,7 +83,7 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
             <>
               <div className="flex gap-4">
                   <div className="flex-1 bg-white rounded-2xl p-4 flex flex-col items-center justify-center text-center border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
-                      <span className="text-[11px] text-gray-400 font-medium mb-1">จำนวน Care Plan</span>
+                      <span className="text-[11px] text-gray-400 font-medium mb-1">จำนวนแผนการดูแล</span>
                       <div className="flex items-center gap-1.5 text-gray-800">
                           <ClipboardList className="w-4 h-4 text-pink-400" />
                           <div className="flex items-baseline gap-1">
@@ -151,13 +151,13 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
                       {appData.patient.filter(p => p.careGiverId === data.id).length > 0 ? (
                         appData.patient.filter(p => p.careGiverId === data.id).map(p => (
                           <div key={p.id} onClick={() => setDetailOpen({ type: 'patient', id: p.id })} className="flex items-center gap-3 p-3 bg-white border border-gray-100 rounded-xl cursor-pointer hover:border-blue-200 hover:shadow-[0_4px_12px_rgba(59,130,246,0.08)] transition-all duration-300 group">
-                              <img src={p.img} className="w-10 h-10 rounded-full object-cover bg-gray-50 border border-gray-100" alt="patient" />
+                              <img src={p.img} className="w-10 h-10 rounded-full object-cover bg-gray-50 border border-gray-100" alt="ผู้ป่วย" />
                               <div className="flex-1 min-w-0">
                                   <p className="text-[13px] font-semibold text-gray-800 truncate">{p.fname} {p.lname}</p>
                                   <div className="flex items-center gap-1.5 mt-0.5 text-[11px] text-gray-500">
                                       <span>อายุ {p.age} ปี</span>
                                       <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-                                      <span className="font-medium text-blue-500">ADL: {p.adl}</span>
+                                      <span className="font-medium text-blue-500">การทำกิจวัตรประจำวัน: {p.adl}</span>
                                   </div>
                               </div>
                               <div className="w-6 h-6 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-blue-50 group-hover:text-blue-500 transition-colors">
@@ -199,11 +199,11 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
 
               <div className="grid grid-cols-3 gap-3">
                   <div className="bg-white rounded-xl p-3 text-center border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
-                      <p className="text-[10px] text-gray-400 font-medium mb-0.5">ADL ปัจจุบัน</p>
+                      <p className="text-[10px] text-gray-400 font-medium mb-0.5">การทำกิจวัตรประจำวันปัจจุบัน</p>
                       <p className="text-lg font-bold text-gray-800">{data.adl}</p>
                   </div>
                   <div className="bg-white rounded-xl p-3 text-center border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
-                      <p className="text-[10px] text-gray-400 font-medium mb-0.5">กลุ่ม LTC</p>
+                      <p className="text-[10px] text-gray-400 font-medium mb-0.5">กลุ่มดูแลระยะยาว</p>
                       <p className="text-sm font-bold text-blue-500 mt-1">{data.ltcGroup}</p>
                   </div>
                   <div className="bg-white rounded-xl p-3 text-center border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
@@ -224,7 +224,7 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
                           <p className="text-sm font-semibold text-gray-700"><span>{data.height}</span><span className="text-[10px] font-normal ml-0.5">ซม.</span></p>
                       </div>
                       <div className="bg-gray-50 rounded-xl p-3 text-center">
-                          <p className="text-[10px] text-gray-400 mb-1">BMI</p>
+                          <p className="text-[10px] text-gray-400 mb-1">ดัชนีมวลกาย</p>
                           <p className="text-sm font-semibold text-gray-700">{data.bmi}</p>
                       </div>
                       <div className="bg-gray-50 rounded-xl p-3 text-center">
@@ -265,7 +265,7 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
                       <div className="w-7 h-7 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 border border-orange-100 shadow-sm">
                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M10 2v7.31"></path><path d="M14 9.3V1.99"></path><path d="M8.5 2h7"></path><path d="M14 9.3a6.5 6.5 0 1 1-4 0"></path><path d="M5.52 16h12.96"></path></svg>
                       </div>
-                      <h4 className="text-sm font-semibold text-gray-800 tracking-wide">เวลาทานยา (Medications)</h4>
+                      <h4 className="text-sm font-semibold text-gray-800 tracking-wide">รายการยาที่ได้รับ</h4>
                   </div>
                   
                   {data.medications && data.medications.length > 0 ? (
@@ -280,7 +280,7 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
                               className="cursor-pointer bg-white rounded-xl p-4 border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex gap-4 items-center group hover:border-orange-300 hover:shadow-[0_4px_16px_rgba(249,115,22,0.08)] transition-all"
                            >
                               <div className="shrink-0 w-14 h-14 bg-gray-50 rounded-full flex items-center justify-center border border-gray-100 group-hover:bg-white transition-colors">
-                                 <img src={getPillSVG(drug.shapeType, drug.colorHex)} alt="pill" className="w-10 h-10 drop-shadow-sm group-hover:scale-110 transition-transform duration-300" />
+                                 <img src={getPillSVG(drug.shapeType, drug.colorHex)} alt="ยา" className="w-10 h-10 drop-shadow-sm group-hover:scale-110 transition-transform duration-300" />
                               </div>
                               <div className="flex-1 min-w-0">
                                  <h5 className="font-bold text-gray-800 text-[15px] truncate group-hover:text-orange-600 transition-colors">{drug.name} <span className="text-xs font-medium text-pink-500 bg-pink-50 px-1.5 py-0.5 rounded group-hover:bg-orange-50 group-hover:text-orange-600 transition-colors">{drug.dosage}</span></h5>
@@ -364,7 +364,7 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
                   <div className="bg-white rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] w-full max-w-[200px]">
                       <span className="text-[11px] text-gray-400 font-medium mb-4 uppercase tracking-wider">รูปลักษณ์อ้างอิง</span>
                       <div className="flex items-center justify-center w-full">
-                          <img src={getPillSVG(data.shapeType, data.colorHex)} className="w-20 h-20 drop-shadow-md hover:scale-110 transition-transform duration-300" alt="Pill Shape" />
+                          <img src={getPillSVG(data.shapeType, data.colorHex)} className="w-20 h-20 drop-shadow-md hover:scale-110 transition-transform duration-300" alt="รูปทรงเม็ดยา" />
                       </div>
                       <div className="mt-4 flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
                           <div className="w-3 h-3 rounded-full border border-gray-200 shadow-inner" style={{ backgroundColor: data.colorHex }}></div>
@@ -377,7 +377,7 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
                   <h4 className="text-xs font-semibold text-gray-800 uppercase tracking-wider mb-3 ml-1">ข้อมูลเชิงลึก</h4>
                   <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-4 text-sm">
                       <div className="flex justify-between items-center pb-3 border-b border-gray-50">
-                          <p className="text-gray-400 font-medium text-[12px]">ขนาดยา (Dosage)</p>
+                          <p className="text-gray-400 font-medium text-[12px]">ขนาดยา</p>
                           <p className="font-semibold text-gray-800 bg-pink-50 text-pink-600 px-3 py-1 rounded-full">{data.dosage}</p>
                       </div>
                       <div className="flex justify-between items-center">
@@ -431,20 +431,20 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
                     </div>
                     <h3 className="text-xl font-bold text-gray-800">บันทึกคัดกรอง</h3>
                     <p className="text-[13px] text-gray-500 mt-1">วันที่ {data.date} เวลา {data.time} (ระยะเวลา {data.duration})</p>
-                 </div>
-
-                 <div className="mt-6 space-y-6">
+                  </div>
+                  
+                  <div className="mt-6 space-y-6">
                     {/* Patient & Caregiver info */}
                     <div className="grid grid-cols-2 gap-4">
                        <div className="bg-gray-50 rounded-xl p-4 border border-gray-100 flex items-center gap-3">
-                          <img src={patient?.img} alt="patient" className="w-10 h-10 rounded-full bg-white border border-gray-200" />
+                          <img src={patient?.img} alt="ผู้ป่วย" className="w-10 h-10 rounded-full bg-white border border-gray-200" />
                           <div className="min-w-0">
                              <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wider truncate">คนไข้ที่ถูกประเมิน</p>
                              <p className="text-[13px] font-semibold text-gray-800 truncate">{patient?.title}{patient?.fname} {patient?.lname}</p>
                           </div>
                        </div>
                        <div className="bg-gray-50 rounded-xl p-4 border border-gray-100 flex items-center gap-3">
-                          <img src={caregiver?.img} alt="caregiver" className="w-10 h-10 rounded-full bg-white border border-gray-200" />
+                          <img src={caregiver?.img} alt="ผู้ดูแล" className="w-10 h-10 rounded-full bg-white border border-gray-200" />
                           <div className="min-w-0">
                              <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wider truncate">ผู้ประเมิน</p>
                              <p className="text-[13px] font-semibold text-gray-800 truncate">{caregiver?.fname} {caregiver?.lname}</p>
@@ -455,24 +455,24 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
                     {/* Vitals */}
                     <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
                        <h4 className="text-[12px] font-bold text-gray-800 mb-4 uppercase tracking-wider flex items-center gap-2">
-                           <div className="w-1.5 h-1.5 rounded-full bg-red-400"></div> สัญญาณชีพ (Vital Signs)
+                           <div className="w-1.5 h-1.5 rounded-full bg-red-400"></div> สัญญาณชีพ
                        </h4>
                        <div className="grid grid-cols-2 gap-y-4 gap-x-6">
                           <div>
-                             <p className="text-[11px] text-gray-400 mb-1">อุณหภูมิ (Temp)</p>
-                             <p className="text-[13px] font-semibold text-gray-800">{data.temp} °C</p>
+                             <p className="text-[11px] text-gray-400 mb-1">อุณหภูมิ</p>
+                             <p className="text-[13px] font-semibold text-gray-800">{data.temp} องศาเซลเซียส</p>
                           </div>
                           <div>
-                             <p className="text-[11px] text-gray-400 mb-1">ชีพจร (HR)</p>
-                             <p className="text-[13px] font-semibold text-gray-800">{data.hr} bpm</p>
+                             <p className="text-[11px] text-gray-400 mb-1">ชีพจร</p>
+                             <p className="text-[13px] font-semibold text-gray-800">{data.hr} ครั้งต่อนาที</p>
                           </div>
                           <div>
-                             <p className="text-[11px] text-gray-400 mb-1">ความดัน (BP)</p>
-                             <p className="text-[13px] font-semibold text-gray-800">{data.bp} mmHg</p>
+                             <p className="text-[11px] text-gray-400 mb-1">ความดันโลหิต</p>
+                             <p className="text-[13px] font-semibold text-gray-800">{data.bp} มิลลิเมตรปรอท</p>
                           </div>
                           <div>
-                             <p className="text-[11px] text-gray-400 mb-1">การหายใจ (RR)</p>
-                             <p className="text-[13px] font-semibold text-gray-800">{data.rr} /min</p>
+                             <p className="text-[11px] text-gray-400 mb-1">อัตราการหายใจ</p>
+                             <p className="text-[13px] font-semibold text-gray-800">{data.rr} ครั้งต่อนาที</p>
                           </div>
                        </div>
                     </div>
@@ -480,19 +480,19 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
                     {/* Screening Results */}
                     <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
                        <h4 className="text-[12px] font-bold text-gray-800 mb-4 uppercase tracking-wider flex items-center gap-2">
-                           <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div> ผลการประเมิน (Screening)
+                           <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div> ผลการประเมิน
                        </h4>
                        <div className="space-y-4">
                           <div className="flex justify-between items-center pb-3 border-b border-gray-50">
-                             <p className="text-[12px] text-gray-500">คัดกรอง 2Q</p>
+                             <p className="text-[12px] text-gray-500">แบบคัดกรองภาวะซึมเศร้า 2 คำถาม</p>
                              <p className="text-[13px] font-semibold text-gray-800">{data.screening2Q}</p>
                           </div>
                           <div className="flex justify-between items-center pb-3 border-b border-gray-50">
-                             <p className="text-[12px] text-gray-500">ADL วันนี้</p>
+                             <p className="text-[12px] text-gray-500">การทำกิจวัตรประจำวันวันนี้</p>
                              <p className="text-[13px] font-semibold text-gray-800">{data.adlToday}</p>
                           </div>
                           <div className="flex justify-between items-center pb-3 border-b border-gray-50">
-                             <p className="text-[12px] text-gray-500">AMT ความจำ</p>
+                             <p className="text-[12px] text-gray-500">การประเมินสมรรถภาพสมอง</p>
                              <p className="text-[13px] font-semibold text-gray-800">{data.amt}</p>
                           </div>
                           <div>
