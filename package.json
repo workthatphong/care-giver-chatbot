@@ -11,5 +11,8 @@
     "build:frontend": "npm run build --workspace=frontend",
     "start:backend": "npm start --workspace=backend",
     "build": "npm run build --workspace=frontend"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.11.1"
   }
 }
