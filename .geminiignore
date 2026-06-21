@@ -5,4 +5,7 @@ build/
 .vercel/
 .next/
 coverage/
-.env
+.env*
+*.db
+*.sqlite
+*.sqlite3

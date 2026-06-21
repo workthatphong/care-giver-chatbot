@@ -53,6 +53,15 @@ typings/
 
 # dotenv environment variables file
 .env
+.env.*
+!.env.example
+!.env.template
+
+# SQLite Databases
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
 
 # next.js build output
 .next
