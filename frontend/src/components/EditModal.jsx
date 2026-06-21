@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, ChevronDown, Check, UserPlus, Camera } from 'lucide-react';
 import AccountLinking from './AccountLinking';
+import { getDisplayImg } from '../utils';
 
 const getPillSVG = (shape, colorHex) => {
   let svgContent = '';
@@ -479,7 +480,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
   const excludedKeys = ['id', '_type', '_isNew', 'img', 'realImg', 'shapeType', 'colorHex', 'careGiverId', 'linkedAccounts', 'symptoms', 'barcodeImg', 'colorTxt', 'shapeTxt', 'medications', 'problems', 'goals'];
   const fields = Object.keys(itemData).filter(k => !excludedKeys.includes(k));
 
-  const imageSrc = type === 'drug' ? formData.realImg : formData.img;
+  const imageSrc = getDisplayImg(type === 'drug' ? formData.realImg : formData.img);
 
   const isNew = itemData._isNew;
   const titleText = isNew 
@@ -530,7 +531,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                     >
                       {selectedCg ? (
                         <div className="flex items-center gap-3">
-                          <img src={selectedCg.img} className="w-7 h-7 rounded-full object-cover border border-gray-200 shadow-sm" alt="ผู้ดูแล" />
+                          <img src={getDisplayImg(selectedCg.img)} className="w-7 h-7 rounded-full object-cover border border-gray-200 shadow-sm" alt="ผู้ดูแล" />
                           <span className="text-sm font-medium text-gray-800">{selectedCg.title}{selectedCg.fname} {selectedCg.lname}</span>
                         </div>
                       ) : (
@@ -547,7 +548,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                             onClick={() => handleCareGiverSelect(cg)}
                             className={`flex items-center gap-3 px-4 py-2.5 cursor-pointer hover:bg-pink-50 transition-colors ${formData.careGiverId === cg.id ? 'bg-pink-50/50' : ''}`}
                           >
-                            <img src={cg.img} className="w-8 h-8 rounded-full object-cover border border-pink-100" alt="ผู้ดูแล" />
+                            <img src={getDisplayImg(cg.img)} className="w-8 h-8 rounded-full object-cover border border-pink-100" alt="ผู้ดูแล" />
                             <div className="flex-1">
                               <p className={`text-sm font-medium ${formData.careGiverId === cg.id ? 'text-pink-600' : 'text-gray-700'}`}>
                                 {cg.title}{cg.fname} {cg.lname}
@@ -602,7 +603,7 @@ const EditModal = ({ isOpen, onClose, onSave, itemData, type, appData }) => {
                               <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${isSelected ? 'bg-blue-500 border-blue-500' : 'bg-white border-gray-300'}`}>
                                 {isSelected && <Check className="w-3.5 h-3.5 text-white" />}
                               </div>
-                              <img src={pt.img} className="w-8 h-8 rounded-full object-cover border border-gray-200" alt="ผู้ป่วย" />
+                              <img src={getDisplayImg(pt.img)} className="w-8 h-8 rounded-full object-cover border border-gray-200" alt="ผู้ป่วย" />
                               <div className="flex-1">
                                 <p className={`text-sm font-medium ${isSelected ? 'text-blue-600' : 'text-gray-700'}`}>
                                   {pt.title}{pt.fname} {pt.lname}

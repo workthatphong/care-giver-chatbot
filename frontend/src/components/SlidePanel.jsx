@@ -4,6 +4,7 @@ import {
   HeartHandshake, Barcode, Edit3, Trash2, UserMinus 
 } from 'lucide-react';
 import AccountLinking from './AccountLinking';
+import { getDisplayImg } from '../utils';
 
 const getPillSVG = (shape, colorHex) => {
   let svgContent = '';
@@ -56,7 +57,7 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
         {type !== 'careplan' && (
           <div className="p-8 pb-6 border-b border-pink-50 flex justify-between items-start relative bg-gradient-to-b from-pink-50/30 to-transparent">
               <div className="flex items-center gap-5">
-                   <img src={data.img || data.realImg} className="w-16 h-16 rounded-full object-cover border-4 border-white shadow-sm bg-pink-50" alt="โปรไฟล์" />
+                   <img src={getDisplayImg(data.img || data.realImg)} className="w-16 h-16 rounded-full object-cover border-4 border-white shadow-sm bg-pink-50" alt="โปรไฟล์" />
                    <div>
                        <h2 className="text-lg font-semibold text-gray-800 tracking-tight">
                          {data.title ? `${data.title}${data.fname} ${data.lname}` : data.name}
@@ -151,7 +152,7 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
                       {appData.patient.filter(p => p.careGiverId === data.id).length > 0 ? (
                         appData.patient.filter(p => p.careGiverId === data.id).map(p => (
                           <div key={p.id} onClick={() => setDetailOpen({ type: 'patient', id: p.id })} className="flex items-center gap-3 p-3 bg-white border border-gray-100 rounded-xl cursor-pointer hover:border-blue-200 hover:shadow-[0_4px_12px_rgba(59,130,246,0.08)] transition-all duration-300 group">
-                              <img src={p.img} className="w-10 h-10 rounded-full object-cover bg-gray-50 border border-gray-100" alt="ผู้ป่วย" />
+                              <img src={getDisplayImg(p.img)} className="w-10 h-10 rounded-full object-cover bg-gray-50 border border-gray-100" alt="ผู้ป่วย" />
                               <div className="flex-1 min-w-0">
                                   <p className="text-[13px] font-semibold text-gray-800 truncate">{p.fname} {p.lname}</p>
                                   <div className="flex items-center gap-1.5 mt-0.5 text-[11px] text-gray-500">
@@ -437,14 +438,14 @@ const SlidePanel = ({ detailOpen, setDetailOpen, appData, onEdit, onDelete, onIt
                     {/* Patient & Caregiver info */}
                     <div className="grid grid-cols-2 gap-4">
                        <div className="bg-gray-50 rounded-xl p-4 border border-gray-100 flex items-center gap-3">
-                          <img src={patient?.img} alt="ผู้ป่วย" className="w-10 h-10 rounded-full bg-white border border-gray-200" />
+                          <img src={getDisplayImg(patient?.img)} alt="ผู้ป่วย" className="w-10 h-10 rounded-full bg-white border border-gray-200" />
                           <div className="min-w-0">
                              <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wider truncate">คนไข้ที่ถูกประเมิน</p>
                              <p className="text-[13px] font-semibold text-gray-800 truncate">{patient?.title}{patient?.fname} {patient?.lname}</p>
                           </div>
                        </div>
                        <div className="bg-gray-50 rounded-xl p-4 border border-gray-100 flex items-center gap-3">
-                          <img src={caregiver?.img} alt="ผู้ดูแล" className="w-10 h-10 rounded-full bg-white border border-gray-200" />
+                          <img src={getDisplayImg(caregiver?.img)} alt="ผู้ดูแล" className="w-10 h-10 rounded-full bg-white border border-gray-200" />
                           <div className="min-w-0">
                              <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wider truncate">ผู้ประเมิน</p>
                              <p className="text-[13px] font-semibold text-gray-800 truncate">{caregiver?.fname} {caregiver?.lname}</p>
