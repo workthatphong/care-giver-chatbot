@@ -1,22 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import SlidePanel from './components/SlidePanel';
 import EditModal from './components/EditModal';
 import DeleteConfirmModal from './components/DeleteConfirmModal';
-import { careGivers as initCareGivers, patients as initPatients, drugs as initDrugs, careplans as initCareplans } from './data/mockData';
 
 function App() {
   const [currentView, setCurrentView] = useState('caregiver');
   const [detailOpen, setDetailOpen] = useState(null);
   
   const [appData, setAppData] = useState({
-    caregiver: initCareGivers,
-    patient: initPatients,
-    drug: initDrugs,
-    careplan: initCareplans
+    caregiver: [],
+    patient: [],
+    drug: [],
+    careplan: []
   });
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // ดึงข้อมูลจริงจาก /api ซึ่งจะเลือกใช้ Local SQLite หรือ Supabase ให้อัตโนมัติ
+    fetch('/api')
+      .then(res => res.json())
+      .then(result => {
+        if (result.data) {
+          setAppData(prev => ({
+            ...prev,
+            caregiver: result.data.careGivers || [],
+            patient: result.data.patients || [],
+            drug: result.data.drugs || []
+          }));
+        }
+      })
+      .catch(error => {
+        console.error("Failed to load data from API:", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   const [deleteModal, setDeleteModal] = useState({ isOpen: false, item: null });
   const [editModal, setEditModal] = useState({ isOpen: false, item: null });
