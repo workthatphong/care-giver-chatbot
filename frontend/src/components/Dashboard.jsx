@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Users, HeartHandshake } from 'lucide-react';
+import { ArrowRight, Users, HeartHandshake, ClipboardList, Calendar, Clock } from 'lucide-react';
 
 const getPillSVG = (shape, colorHex) => {
   let svgContent = '';
@@ -85,6 +85,49 @@ const Dashboard = ({ currentView, setDetailOpen, appData }) => {
              </div>
           </div>
         ))}
+      </div>
+    );
+  }
+
+  if (currentView === 'careplan') {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
+        {appData.careplan.map(cp => {
+          const patient = appData.patient.find(p => p.id === cp.patientId);
+          const caregiver = appData.caregiver.find(c => c.id === cp.careGiverId);
+          return (
+            <div key={cp.id} onClick={() => setDetailOpen({ type: 'careplan', id: cp.id })} className="bg-white rounded-2xl p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(168,85,247,0.1)] hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-gray-100 hover:border-purple-200 flex flex-col gap-3 group">
+              <div className="flex justify-between items-start mb-1">
+                 <div className="flex items-center gap-1.5 text-[11px] text-purple-600 bg-purple-50 px-2 py-1 rounded-md font-medium">
+                    <Calendar className="w-3.5 h-3.5" /> {cp.date}
+                 </div>
+                 <div className="flex items-center gap-1.5 text-[11px] text-blue-600 bg-blue-50 px-2 py-1 rounded-md font-medium">
+                    <Clock className="w-3.5 h-3.5" /> {cp.time}
+                 </div>
+              </div>
+              
+              <div className="flex items-center gap-3">
+                 <img src={patient?.img} alt="patient" className="w-10 h-10 rounded-full border border-gray-100 bg-gray-50" />
+                 <div className="flex-1 min-w-0">
+                    <p className="text-[10px] text-gray-400 font-medium uppercase">ผู้ป่วย</p>
+                    <h4 className="text-[13px] font-semibold text-gray-800 truncate">{patient?.title}{patient?.fname} {patient?.lname}</h4>
+                 </div>
+              </div>
+              
+              <div className="flex items-center gap-3 mt-1">
+                 <img src={caregiver?.img} alt="caregiver" className="w-8 h-8 rounded-full border border-gray-100 bg-gray-50" />
+                 <div className="flex-1 min-w-0">
+                    <p className="text-[10px] text-gray-400 font-medium uppercase">ผู้ตรวจประเมิน</p>
+                    <p className="text-[12px] font-medium text-gray-700 truncate">{caregiver?.fname} {caregiver?.lname}</p>
+                 </div>
+              </div>
+              
+              <div className="mt-2 pt-3 border-t border-gray-50">
+                 <p className="text-[11px] text-gray-500 line-clamp-2 leading-relaxed bg-gray-50 p-2 rounded-lg">{cp.symptomsSummary}</p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     );
   }

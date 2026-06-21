@@ -16,5 +16,26 @@ export const drugs = [
   { id: 202, name: 'Amoxicillin', dosage: '250 mg', barcode: '8850002000456', colorTxt: 'ฟ้า', colorHex: '#7dd3fc', shapeTxt: 'แคปซูล', shapeType: 'capsule', realImg: 'https://placehold.co/300x200/f8fafc/94a3b8?text=Real+Pack' },
   { id: 203, name: 'Ibuprofen', dosage: '400 mg', barcode: '8850003000789', colorTxt: 'ชมพู', colorHex: '#f472b6', shapeTxt: 'วงรี', shapeType: 'oval', realImg: 'https://placehold.co/300x200/f8fafc/94a3b8?text=Real+Pack' },
   { id: 204, name: 'Amlodipine', dosage: '5 mg', barcode: '8850004000012', colorTxt: 'ขาว', colorHex: '#ffffff', shapeTxt: 'วงรี', shapeType: 'oval', realImg: 'https://placehold.co/300x200/f8fafc/94a3b8?text=Real+Pack' },
-  { id: 205, name: 'Metformin', dosage: '850 mg', barcode: '8850005000999', colorTxt: 'ขาว', colorHex: '#ffffff', shapeTxt: 'แคปซูล', shapeType: 'capsule', realImg: 'https://placehold.co/300x200/f8fafc/94a3b8?text=Real+Pack' }
+];
+
+export const careplans = [
+  { 
+    id: 301, 
+    patientId: 101, 
+    careGiverId: 1, 
+    date: '2023-10-25', 
+    time: '10:30', 
+    duration: '45 นาที',
+    symptomsSummary: 'ผู้ป่วยมีอาการอ่อนเพลียเล็กน้อย แต่สามารถทำกิจกรรมพื้นฐานได้',
+    temp: 36.5,
+    hr: 78,
+    rr: 20,
+    bp: '120/80',
+    screening2Q: 'ปกติ',
+    adlToday: 11,
+    amt: 'ปกติ (8/10)',
+    generalCondition: 'รู้สึกตัวดี ถามตอบรู้เรื่อง ช่วยเหลือตัวเองได้บางส่วน',
+    activitiesPerformed: 'เช็ดตัว, วัดความดัน, ทำกายภาพบำบัดเบื้องต้น',
+    evaluationResult: 'ผู้ป่วยให้ความร่วมมือดี ชีพจรและความดันอยู่ในเกณฑ์ปกติ'
+  }
 ];

@@ -5,7 +5,7 @@ import Dashboard from './components/Dashboard';
 import SlidePanel from './components/SlidePanel';
 import EditModal from './components/EditModal';
 import DeleteConfirmModal from './components/DeleteConfirmModal';
-import { careGivers as initCareGivers, patients as initPatients, drugs as initDrugs } from './data/mockData';
+import { careGivers as initCareGivers, patients as initPatients, drugs as initDrugs, careplans as initCareplans } from './data/mockData';
 
 function App() {
   const [currentView, setCurrentView] = useState('caregiver');
@@ -14,7 +14,8 @@ function App() {
   const [appData, setAppData] = useState({
     caregiver: initCareGivers,
     patient: initPatients,
-    drug: initDrugs
+    drug: initDrugs,
+    careplan: initCareplans
   });
 
   const [deleteModal, setDeleteModal] = useState({ isOpen: false, item: null });
@@ -25,10 +26,13 @@ function App() {
       return { id: Date.now(), title: '', fname: '', lname: '', carePlans: 0, nid: '', address: '', moo: '', subdist: '', dist: '', prov: '', patients: 0, img: 'https://placehold.co/150x150/fce7f3/db2777?text=NEW' };
     }
     if (type === 'patient') {
-      return { id: Date.now(), title: '', fname: '', lname: '', age: 0, nid: '', adl: 0, ltcGroup: '', frequency: '', weight: 0, height: 0, bmi: 0, waist: 0, address: '', moo: '', subdist: '', dist: '', prov: '', primaryCareGiver: '', careGiverId: null, img: 'https://placehold.co/150x150/e0f2fe/0284c7?text=NEW' };
+      return { id: Date.now(), title: '', fname: '', lname: '', age: 0, nid: '', adl: 0, ltcGroup: '', frequency: '', weight: 0, height: 0, bmi: 0, waist: 0, address: '', moo: '', subdist: '', dist: '', prov: '', primaryCareGiver: '', careGiverId: null, img: 'https://placehold.co/150x150/e0f2fe/0284c7?text=NEW', medications: [], problems: [], goals: [] };
     }
     if (type === 'drug') {
-      return { id: Date.now(), name: '', dosage: '', barcode: '', colorTxt: '', colorHex: '#ffffff', shapeTxt: '', shapeType: 'round', realImg: 'https://placehold.co/300x200/f8fafc/94a3b8?text=NEW' };
+      return { id: Date.now(), name: '', dosage: '', barcode: '', colorTxt: '', colorHex: '#ffffff', shapeTxt: '', shapeType: 'round', realImg: 'https://placehold.co/300x200/f8fafc/94a3b8?text=NEW', symptoms: [] };
+    }
+    if (type === 'careplan') {
+      return { id: Date.now(), patientId: '', careGiverId: '', date: '', time: '', duration: '', symptomsSummary: '', temp: '', hr: '', rr: '', bp: '', screening2Q: '', adlToday: '', amt: '', generalCondition: '', activitiesPerformed: '', evaluationResult: '' };
     }
     return {};
   };
@@ -84,6 +88,10 @@ function App() {
     setEditModal({ isOpen: false, item: null });
   };
 
+  const handleItemClick = (item, type) => {
+    setDetailOpen({ type, id: item.id });
+  };
+
   return (
     <div className="flex h-screen w-full text-gray-700 font-sans relative">
       <Sidebar currentView={currentView} setCurrentView={setCurrentView} />
@@ -100,7 +108,8 @@ function App() {
           setDetailOpen={setDetailOpen} 
           appData={appData} 
           onEdit={handleEdit} 
-          onDelete={handleDelete} 
+          onDelete={handleDelete}
+          onItemClick={handleItemClick}
         />
       </main>
 
