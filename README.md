@@ -1,6 +1,6 @@
-# Care Giver Chatbot
+# Care Giver Chatbot 
 
-## Project Overview
+## Project Overview  
 This project has been restructured into a Monorepo to prevent monolithic files and ensure scalable development. It is separated into `frontend` and `backend` workspaces, fully deployable on Vercel.
 
 ## Structure
@@ -9,7 +9,7 @@ This project has been restructured into a Monorepo to prevent monolithic files a
 - `package.json`: Root package with NPM workspaces configured.
 
 ## Running Locally
-To start the frontend development server:
+To start the frontend development server: 
 ```bash
 npm run dev:frontend
 ```
